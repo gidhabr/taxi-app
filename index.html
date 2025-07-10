@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Комфорт плюс - Заказ такси</title>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+        'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: #0f172a;
+      color: white;
+    }
+    input, textarea {
+      user-select: text !important;
+      -webkit-user-select: text !important;
+    }
+    input[type='date']::-webkit-calendar-picker-indicator,
+    input[type='time']::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+      cursor: pointer;
+      background: transparent;
+      padding: 4px;
+      opacity: 1;
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+    }
+    input:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const ComfortPlusTaxiApp = () => {
+      const [name, setName] = useState('');
+      const [phone, setPhone] = useState('');
+      const [from, setFrom] = useState('');
+      const [to, setTo] = useState('');
+      const [date, setDate] = useState('');
+      const [time, setTime] = useState('');
+
+      const handleSubmit = () => {
+        alert(`Заявка отправлена:\n${name}\n${phone}\n${from} → ${to}\n${date} ${time}`);
+      };
+
+      return (
+        <div className="p-4 max-w-md mx-auto">
+          <h1 className="text-2xl font-bold text-center mb-6">Комфорт плюс</h1>
+
+          <input
+            type="text"
+            placeholder="ФИО"
+            className="w-full p-3 mb-4 rounded-lg bg-white/10 text-white placeholder-white/60"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            type="tel"
+            placeholder="Телефон"
+            className="w-full p-3 mb-4 rounded-lg bg-white/10 text-white placeholder-white/60"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Откуда"
+            className="w-full p-3 mb-4 rounded-lg bg-white/10 text-white placeholder-white/60"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Куда"
+            className="w-full p-3 mb-4 rounded-lg bg-white/10 text-white placeholder-white/60"
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
+          />
+          <input
+            type="date"
+            className="w-full p-3 mb-4 rounded-lg bg-white/10 text-white"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+          <input
+            type="time"
+            className="w-full p-3 mb-6 rounded-lg bg-white/10 text-white"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+          />
+
+          <button
+            className="w-full py-3 bg-teal-500 hover:bg-teal-600 rounded-lg text-white font-bold text-lg"
+            onClick={handleSubmit}
+          >
+            Заказать такси
+          </button>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<ComfortPlusTaxiApp />, document.getElementById('root'));
+  </script>
+</body>
+</html>
